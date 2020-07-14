@@ -1,0 +1,100 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Homepage</title>
+</head>
+<body>
+    <div>
+        <p>Bu bölümde post-get ilişkisine dair ufak veri etkileşimini göstereceğiz.
+        Öncelikle kullanıcıdan bilgi alabilmek için aşağıdaki formu oluşturduk.</p>
+        <p>Bu formun kodları:</p>
+        <pre>
+ { 
+            SelectListItem[] takimlar = new SelectListItem[4]
+            {
+                new SelectListItem() {Text="Beşiktaş JK"},
+                new SelectListItem() {Text="Galatasaray SK"},
+                new SelectListItem() {Text="Fenerbahçe SK"},
+                new SelectListItem() {Text="Başakşehir SK"}
+
+            };
+        }
+        using (Html.BeginForm())
+        {
+            ("Isim Soyisim:") Html.TextBox("text1") 
+
+            ("Şifre:") Html.TextBox("text2") 
+
+            ("Mail:")Html.TextBox("text3") 
+
+            ("Takım:") Html.DropDownList("list1",takimlar)
+
+            ("Onaylıyorum.") Html.CheckBox("check1")
+        
+
+        input type="submit" value="Send" />
+
+        }
+</pre>
+
+        <p>Yukarıdaki formu oluşturmadan önce elbette View-Controller ilişkimizi tamamlamıştık aşağıda onların kodu:</p>
+        <pre>
+ public ActionResult Homepage()
+        {
+            return View();
+        }
+        [HttpPost] -> bize geri dönecek bilgiler.
+        public ActionResult Homepage(string text1, string text2, string text3, bool check1, string list1)
+        {
+            var cevap = Request.Form["text1"];
+            var cevap2 = Request.Form["text2"];
+            var cevap3 = Request.Form["text3"];
+            var cevap4 = Request.Form["list1"];
+            var check = Request.Form.GetValues("check1")[0];
+            return View();
+        }
+</pre>
+    </div>
+    <p>Kodları deneyerek Veri alma işlemini görebilirsiniz.</p>
+    <div>
+        @{
+            SelectListItem[] takimlar = new SelectListItem[4]
+            {
+                new SelectListItem() {Text="Beşiktaş JK"},
+                new SelectListItem() {Text="Galatasaray SK"},
+                new SelectListItem() {Text="Fenerbahçe SK"},
+                new SelectListItem() {Text="Başakşehir SK"}
+
+            };
+        }
+        @using (Html.BeginForm())
+        {
+            @("Isim Soyisim:") @Html.TextBox("text1") <br />
+            @("Şifre:") @Html.TextBox("text2") <br />
+            @("Mail:")@Html.TextBox("text3") <br />
+            @("Takım:") @Html.DropDownList("list1", takimlar)<br />
+            @("Onaylıyorum.") @Html.CheckBox("check1")
+            <hr />
+            <input type="submit" value="Send" id="btn1" name="btn1" />
+            
+        }
+       
+
+
+
+
+    </div>
+
+    <p>Olayımız şu iki farklı imzaya sahip aynı isimli iki Action oluşturduk ancak Post olarak bize geri dönecek olan sayfanın
+    imzasına alacağımız değerlerin ID' sini atadık. Bunun sebebi aldığımız verilerin doğru adrese gitmesini sağlamak.
+    Ardından oluşturulan buton ile bu verileri postladık.
+    İşlem bu kadar.</p>
+</body>
+</html>
