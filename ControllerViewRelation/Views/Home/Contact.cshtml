@@ -1,0 +1,45 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Contact</title>
+</head>
+<body>
+    <h2>Contact Page</h2>
+    <hr />
+    <div>
+        <ul>
+            <li><a href="About">About</a></li>
+            <li><a href="Homepage">Homepage</a></li>
+            <li><a href="Contact">Contact</a></li>
+        </ul>
+
+    </div>
+    <hr />
+    <div>
+        <b>Teknik Direktör Adı:</b> @Html.TextBox("TDisim")
+        <p>Teknik Direktör Adı:<input type="text" value="@ViewBag.TDisim" /></p>
+        <br /><hr />
+        <p>C#: @Html.CheckBox("check")</p><br />
+        <p>C++: @Html.CheckBox("check2")</p>
+    </div>
+    <hr />
+    <div>
+        <p>Bu Bölümde textboxların boş olmasının veya checkboxların boş olmasının sebebi viewbag-viewdata'nın ömürlerini göstermekti. Veriler taşınmadı bile.</p>
+        <p>Aşağıdaki veriler TempData' dan çekilmiş olacak.</p>
+        <b>Premiere Lig Takımları:</b>
+        <ul>
+            <li>@ViewBag.team</li>
+            <li>@ViewBag.team2</li>
+            <li>@ViewBag.team3</li>
+            <li>@ViewBag.team4</li>
+        </ul>
+    </div>
+</body>
+</html>

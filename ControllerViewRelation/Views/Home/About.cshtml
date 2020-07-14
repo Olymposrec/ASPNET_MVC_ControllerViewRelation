@@ -1,0 +1,146 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>About</title>
+</head>
+<body>
+    <div>
+        <h2>About Page</h2>
+        <hr />
+    </div>
+    <div>
+        <ul>
+            <li><a href="About">About</a></li>
+            <li><a href="Homepage">Homepage</a></li>
+            <li><a href="Contact">Contact</a></li>
+        </ul>
+        
+    </div>
+    <div>
+        <p>Burada oluşturacağımız yeni kısım bizlere ViewBag, ViewData' dan alınan verilerin html elementlerinin içine default olarak nasıl yerleştirebileceğimizi görüyoruz.
+        öncelikle Controller içine yazdığımız kodları sizler ile paylaşacağım:</p>
+        <pre>
+            ViewData["TDisim"] = "Melih Akköse";
+            ViewBag.TDaktif = true;
+            ViewBag.TDTakim = "Liverpool FC";
+
+            ViewBag.team = "Beşiktaş JK";
+            ViewBag.team2 = "Fenerbahçe SK";
+            ViewBag.team3 = "Galatasaray SK";
+            ViewBag.team4 = "Başakşehir SK";
+            ViewBag.mesaj = "Bu mesaj hidden elementi için özel yazılmıştır.";
+            ViewBag.check = true;
+            ViewBag.check2 = false;
+            ViewBag.Takimlar =
+                new SelectListItem[]
+                {
+                    new SelectListItem(){Text="Liverpool FC"},
+            new SelectListItem() { Text = "Manchester United FC" },
+            new SelectListItem() { Text = "Manchester City FC" },
+            new SelectListItem() { Text = "Tottenham FC" }
+                };
+            return View();
+</pre>
+        <p>Yukarıdaki kodlar ikinci view için yazılan kodlardır. Çıktılara aşağıdan ulaşabilirsiniz.</p>
+    </div>
+    <div>
+        <b>Teknik Direktör Adı:</b> @Html.TextBox("TDisim")
+        <p>Teknik Direktör Adı:<input type="text" value="@ViewBag.TDisim" /></p>
+        <br /><hr />
+        <p>C#: @Html.CheckBox("check")</p><br />
+        <p>C++: @Html.CheckBox("check2")</p>
+        <br /><hr />
+        <b>Teknik Direktör Durumu:</b> @ViewBag.TDAktif<br />
+        <b>Teknik Direktör Takım:</b> @Html.TextBox("TDTakim")<br />
+        <b>Teknik Direktör Favori Takım:</b> @Html.DisplayText("team")<br />
+        <b>Teknik Direktör Anti Takım:</b> @Html.Value("team3")<br />
+        @Html.Hidden("mesaj")<hr />
+        <p>Premiere Lig Takımları:</p> @Html.DropDownList("Takimlar")
+
+    <p>Yukarıdaki çıktıların HTML kodları:</p>
+    <b><pre>
+b>Teknik Direktör Adı:/b> Html.TextBox("TDisim")
+p>Teknik Direktör Adı: input type="text" value="ViewBag.TDisim" />/p>
+p>C#: Html.CheckBox("check")/p>br />
+p>C++: Html.CheckBox("check2")/p>
+b>Teknik Direktör Durumu:/b> ViewBag.TDAktifbr />
+b>Teknik Direktör Takım:/b> Html.TextBox("TDTakim")br />
+b>Teknik Direktör Favori Takım:/b> Html.DisplayText("team")br />
+b>Teknik Direktör Anti Takım:/b> Html.Value("team3")br />
+Html.Hidden("mesaj")
+p>Premiere Lig Takımları:/p> Html.DropDownList("Takimlar")
+</pre></b>
+        <hr />
+        <b>Süperlig Takımları:</b>
+        <ul>
+            <li>@ViewBag.team</li>
+            <li>@ViewBag.team2</li>
+            <li>@ViewBag.team3</li>
+            <li>@ViewBag.team4</li>
+        </ul>
+        <hr />
+
+
+        <p>Yukarıda oluşturulan veriler 3 farklı veri örneği ile oluşturulmuştur.</p>
+        <p>Bunlar:</p>
+        <ul>
+            <li>TempData</li>
+            <li>ViewData</li>
+            <li>ViewBag</li>
+        </ul>
+        <p><b>KODLAR:</b></p>
+        <pre>
+            ViewData["text1"]="Melih Akköse";
+            ViewData["TD"] = true;
+
+            ViewBag.team = "Beşiktaş JK";
+            ViewBag.team2 = "Fenerbahçe SK";
+            ViewBag.team3 = "Galatasaray SK";
+            ViewBag.team4 = "Başakşehir SK";
+
+            TempData["team5"] = "Liverpool FC";
+            TempData["team6"] = "Manchester United FC";
+            TempData["team7"] = "Manchester City FC";
+            TempData["team8"] = "Tottenham FC";
+</pre>
+
+        <p>Yukarıda kodda anlaşılacağı üzere 1. gösterim ve 3. gösterimin çağrılışı aşağıdaki gibidir:</p>
+        <pre>
+        b>Ad-Soyad:/b> ViewData["text1"].ToString()
+        br />
+
+        b>Teknik Direktör:/b> ViewData["TD"].ToString() br />br />
+
+        b>Süperlig Takımları:/b>
+        ul>
+        li>ViewBag.team/li>
+        li>ViewBag.team2/li>
+        li>ViewBag.team3/li>
+        li>ViewBag.team4/li>
+        /ul>
+        b>Premiere Lig Takımları:/b>
+        ul>
+        li>TempData["team5"]/li>
+        li>TempData["team6"]/li>
+        li>TempData["team7"]/li>
+        li>TempData["team8"]/li>
+        /ul>
+</pre>
+        <p>
+            Farkları TempData başka bir Controller'da da verileri tutabilirken ViewBag-View Data çalıştığı
+            Action' da etkinlik gösterir.
+        </p>
+        <p>TempData değişkenleri ve değerleri maksimum 1 sayfa daha tutar.</p>
+
+
+
+    </div>
+</body>
+</html>
